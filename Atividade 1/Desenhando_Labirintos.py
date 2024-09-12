@@ -9,8 +9,7 @@ for i in range(T):
         x, y = map(int, input().split())
         if x not in labirinto[y]:    
             labirinto[x].append(y)
-    for k in labirinto:
-        contagem += 2*len(k)
+            contagem += 2
     movimentos.append(contagem)
 
 for i in movimentos:
