@@ -63,5 +63,3 @@ for _ in range(T):
     else:
         resp.append("NO")
 print("\n".join(resp))
-        
-    
