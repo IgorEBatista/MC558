@@ -1,13 +1,3 @@
-
-class no:
-    def __init__(self, nome):
-        self.nome = nome
-        self.vizinhos = []
-        self.visitado = False
-
-    def add_vizinho(self, vizinho):
-        self.vizinhos.append(vizinho)
-
 def bfs(capacidade, fonte, terminal, pai):
     visitados = set()
     fila = []
