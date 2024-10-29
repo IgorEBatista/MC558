@@ -1,3 +1,61 @@
+class min_heap:
+    def __init__(self):
+        self.heap = []
+        self.pos = {}
+    
+    def empty(self):
+        return len(self.heap) == 0
+    
+    def insert(self, v, d):
+        self.heap.append((v, d))
+        self.pos[v] = len(self.heap) - 1
+        self.up(len(self.heap) - 1)
+    
+    def up(self, i):
+        while i > 0:
+            pai = (i - 1) // 2
+            if self.heap[pai][1] > self.heap[i][1]:
+                self.heap[pai], self.heap[i] = self.heap[i], self.heap[pai]
+                self.pos[self.heap[pai][0]] = pai
+                self.pos[self.heap[i][0]] = i
+                i = pai
+            else:
+                break
+    
+    def down(self, i):
+        while 2 * i + 1 < len(self.heap):
+            filho = 2 * i + 1
+            if filho + 1 < len(self.heap) and self.heap[filho + 1][1] < self.heap[filho][1]:
+                filho += 1
+            if self.heap[i][1] > self.heap[filho][1]:
+                self.heap[i], self.heap[filho] = self.heap[filho], self.heap[i]
+                self.pos[self.heap[i][0]] = i
+                self.pos[self.heap[filho][0]] = filho
+                i = filho
+            else:
+                break
+    
+    def decrease_key(self, v, d):
+        i = self.pos[v]
+        self.heap[i] = (v, d)
+        self.up(i)
+    
+    def increase_key(self, v, d):
+        i = self.pos[v]
+        self.heap[i] = (v, d)
+        self.down(i)
+
+    def extract_min(self):
+        if self.empty():
+            return None
+        v, d = self.heap[0]
+        self.heap[0] = self.heap[-1]
+        self.pos[self.heap[0][0]] = 0
+        self.heap.pop()
+        self.down(0)
+        return v, d
+
+
 def AGM_Prim(G, w, r):
     n = len(G)
     d = [float("inf") for _ in range(n)]
@@ -39,9 +97,6 @@ while rodando:
         custo_total_fim += d[i]
     # Calcula a economia
     economia.append(custo_total_ini - custo_total_fim)
-    print(custo_total_ini, custo_total_fim)
-    print(d)
-    print(pais)
     # Verifica o próximo caso
     m, n = input().split()
     m, n = int(m), int(n)
