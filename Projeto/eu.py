@@ -58,9 +58,9 @@ def reduce_3sat_to_cryptarithm(cnf_formula):
     lines[1].extend(['0', 'p', '0'])
     lines[2].extend(['1', 'q', '0'])
 
-    print("Lines:")
+    print(f"Lines: {len(lines[0])}")
     for line in lines:
-        print(" ".join(f"{term:>3}" for term in line))
+        print(" ".join(f"{term:>4}" for term in line))
 
     return {
         "columns": columns,
@@ -71,8 +71,8 @@ def reduce_3sat_to_cryptarithm(cnf_formula):
 # Exemplo de uso:
 # Fórmula: (x1 OR NOT x2 OR x3) AND (NOT x1 OR x2 OR x3)
 cnf_formula = [
-    [(1, False), (2, True), (3, False)]#,  # x1 OR NOT x2 OR x3
-    #[(1, True), (2, False), (3, False)]  # NOT x1 OR x2 OR x3
+    [(1, False), (2, True), (3, False)],  # x1 OR NOT x2 OR x3
+    [(1, True), (2, False), (3, False)]  # NOT x1 OR x2 OR x3
 ]
 
 cryptarithm_instance = reduce_3sat_to_cryptarithm(cnf_formula)
